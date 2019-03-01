@@ -87,16 +87,25 @@ public class PageCryptomonnaie extends AppCompatActivity {
             String vent = ventForce + ventDirection;
             Element elementTemperature = (Element)doc.getElementsByTagName("temp_c").item(0);
             float temperature = Float.parseFloat(elementTemperature.getTextContent());
+            */
+
+            String symbol = jsonobj.getJSONObject("CAD").getString("symbol");
+            String min15= jsonobj.getJSONObject("CAD").getString("15m");
+            String last = jsonobj.getJSONObject("CAD").getString("last");
+            String buy = jsonobj.getJSONObject("CAD").getString("buy");
+            String sell = jsonobj.getJSONObject("CAD").getString("sell");
 
             System.out.println("");
             System.out.println("/////////////////////////////");
-            System.out.println("/// Ville = " + ville);
-            System.out.println("/// Meteo = " + soleilOuNuage);
-            System.out.println("/// Vent : " + vent + "\n");
-            System.out.println("/// Humidite = " + humidite);
-            System.out.println("/// Température = " + temperature);
+            System.out.println("/// Bitcoin");
+            System.out.println("/// Symbol = " + symbol);
+            System.out.println("/// 15 min = " + min15);
+            System.out.println("/// Last = " + last + "\n");
+            System.out.println("/// Buy = " + buy);
+            System.out.println("/// Sell = " + sell);
             System.out.println("/////////////////////////////");
 
+            /*
             TextView affichageTitrePage = (TextView)this.findViewById(R.id.titre_page_meteo);
             affichageTitrePage.setText("Météo de " + ville);
 
@@ -112,12 +121,8 @@ public class PageCryptomonnaie extends AppCompatActivity {
             meteoDAO.ajouterMeteo(soleilOuNuage, Integer.parseInt(humidite), vent, temperature);
             */
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
         }
-         catch (ParserConfigurationException e) {
+         catch (JSONException e) {
             e.printStackTrace();
         }
 
