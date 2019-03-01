@@ -11,11 +11,11 @@ import java.util.Date;
 
 // https://developer.android.com/training/data-storage/sqlite.html
 
-public class MeteoDAO extends SQLiteOpenHelper {
+public class CryptomonnaieDAO extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "Meteo.db";
 
-    public MeteoDAO(Context context) {
+    public CryptomonnaieDAO(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

@@ -24,7 +24,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class PageMeteo extends AppCompatActivity {
+public class PageCryptomonnaie extends AppCompatActivity {
 
     private TextView libelleTitre;
 
@@ -110,7 +110,7 @@ public class PageMeteo extends AppCompatActivity {
             affichageMeteo.append("Humidite : " + humidite + "\n");
 
 
-            MeteoDAO meteoDAO = new MeteoDAO(getApplicationContext());
+            CryptomonnaieDAO meteoDAO = new CryptomonnaieDAO(getApplicationContext());
             meteoDAO.ajouterMeteo(soleilOuNuage, Integer.parseInt(humidite), vent, temperature);
 
 
