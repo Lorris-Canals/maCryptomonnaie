@@ -20,9 +20,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import org.json.*;
 
 public class PageCryptomonnaie extends AppCompatActivity {
 
@@ -41,11 +39,10 @@ public class PageCryptomonnaie extends AppCompatActivity {
 
         libelleTitre = (TextView) findViewById(R.id.message);
 
-        String CLE = "f46b797741ed4313947185158192202";
-        String xml = "";
+        JSONObject jsonobj = null;
 
         try {
-            URL url = new URL("https://api.apixu.com/v1/current.xml?key="+CLE+"&q=Matane");
+            URL url = new URL("https://blockchain.info/fr/ticker");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -55,7 +52,7 @@ public class PageCryptomonnaie extends AppCompatActivity {
                     stringBuilder.append(line).append("\n");
                 }
                 bufferedReader.close();
-                xml = stringBuilder.toString();
+                jsonobj = new JSONObject(stringBuilder.toString());
             }
             finally{
                 urlConnection.disconnect();
@@ -64,9 +61,10 @@ public class PageCryptomonnaie extends AppCompatActivity {
         catch(Exception e) {
             Log.e("ERROR", e.getMessage(), e);
         }
-        System.out.println(xml);
+        System.out.println(jsonobj);
 
         try {
+            /*
             DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = null;
             docBuilder = builderFactory.newDocumentBuilder();
@@ -112,7 +110,7 @@ public class PageCryptomonnaie extends AppCompatActivity {
 
             CryptomonnaieDAO meteoDAO = new CryptomonnaieDAO(getApplicationContext());
             meteoDAO.ajouterMeteo(soleilOuNuage, Integer.parseInt(humidite), vent, temperature);
-
+            */
 
         } catch (IOException e) {
             e.printStackTrace();
