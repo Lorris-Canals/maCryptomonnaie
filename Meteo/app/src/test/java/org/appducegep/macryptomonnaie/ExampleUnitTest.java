@@ -1,4 +1,4 @@
-package com.example.mameteo;
+package com.example.macryptomonnaie;
 
 import org.junit.Test;
 

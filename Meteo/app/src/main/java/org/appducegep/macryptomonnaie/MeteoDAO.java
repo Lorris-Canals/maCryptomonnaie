@@ -1,4 +1,4 @@
-package org.appducegep.mameteo;
+package org.appducegep.macryptomonnaie;
 
 import android.content.ContentValues;
 import android.content.Context;

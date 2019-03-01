@@ -1,4 +1,4 @@
-package org.appducegep.mameteo;
+package org.appducegep.macryptomonnaie;
 
 import android.os.Bundle;
 import android.os.StrictMode;

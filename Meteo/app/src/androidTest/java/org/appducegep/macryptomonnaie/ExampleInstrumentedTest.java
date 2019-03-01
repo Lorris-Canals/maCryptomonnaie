@@ -1,4 +1,4 @@
-package com.example.mameteo;
+package com.example.macryptomonnaie;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
