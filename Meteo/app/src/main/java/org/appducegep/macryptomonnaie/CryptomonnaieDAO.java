@@ -12,21 +12,15 @@ import java.util.Date;
 // https://developer.android.com/training/data-storage/sqlite.html
 
 public class CryptomonnaieDAO extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 3;
-    public static final String DATABASE_NAME = "Meteo.db";
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "Cryptomonnaie.db";
 
     public CryptomonnaieDAO(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     // https://www.sqlite.org/datatype3.html
-    String SQL_CREATION_TABLE_1 = "create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT, date TEXT)";
-    String SQL_CREATION_TABLE_2 = "create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT, date TEXT, vent TEXT)";
-    String SQL_CREATION_TABLE_3 = "create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT, date TEXT, vent TEXT, temperature REAL)";
-
-    String SQL_MISEAJOUR_TABLE_1_A_2_A = "alter table meteo add column vent TEXT";
-    String SQL_MISEAJOUR_TABLE_1_A_2_B = "alter table meteo add column humidite INTEGER";
-    String SQL_MISEAJOUR_TABLE_2_A_3 = "alter table meteo add column temperature REAL";
+    String SQL_CREATION_TABLE = "create table cryptomonnaie(id INTEGER PRIMARY KEY, date TEXT, symbol TEXT, min15 TEXT, last TEXT, buy TEXT, sell TEXT)";
 
 
 
@@ -34,49 +28,29 @@ public class CryptomonnaieDAO extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         Log.d("BASEDEDONNEES","MeteoDAO.onCreate()");
-        db.execSQL(SQL_CREATION_TABLE_3);
-
+        db.execSQL(SQL_CREATION_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int avant, int apres) {
-        Log.d("BASEDEDONNEES","MeteoDAO.onUpgrade() de "+avant+" a "+apres);
-
-        if(avant == 1 && apres >= 2) {
-            db.execSQL(SQL_MISEAJOUR_TABLE_1_A_2_A);
-            db.execSQL(SQL_MISEAJOUR_TABLE_1_A_2_B);
-        }
-        if(avant <= 2 && apres == 3) {
-            db.execSQL(SQL_MISEAJOUR_TABLE_2_A_3);
-        }
-
-
+        Log.d("BASEDEDONNEES","MeteoDAO.onUpgrade()");
     }
 
-    // on peut aussi tolerer les nouveaux champs si ils ne derangent pas + voir aussi la politique de la vie privée
     public void onDowngrade(SQLiteDatabase db, int avant, int apres) {
-        Log.d("BASEDEDONNEES","MeteoDAO.onDowngrade() de "+avant+" a "+apres);
-        // pour retirer une colonne si absolument nécessaire on copie la table dans une table temporaire
-        // ALTER TABLE meteo rename to meteoAvant;
-        // on cree une nouvelle table sans la colonne
-        // create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT)
-        // on copie les anciennes données dans la nouvelle table
-        // INSERT into meteo (id, ville, soleilOuNuage) SELECT id, ville, soleilOuNuage FROM meteoAvant;
-        // DROP table meteoAvant;
+        Log.d("BASEDEDONNEES","MeteoDAO.onDowngrade()");
     }
 
-    public void ajouterMeteo(String soleilOuNuage, int humidite, String vent, float temperature)
+    public void ajouterCryptomonnaie(String symbol, String min15, String last, String buy, String sell)
     {
-        //Date aujourdhui = new Date();
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues meteoDuJour = new ContentValues();
-        meteoDuJour.put("ville", "Matane");
-        meteoDuJour.put("soleilOuNuage", soleilOuNuage);
-        meteoDuJour.put("date", DateFormat.format("MMMM d, yyyy ", (new Date()).getTime()).toString());
-        meteoDuJour.put("vent",vent);
-        meteoDuJour.put("humidite",humidite);
-        meteoDuJour.put("temperature",temperature);
-        long newRowId = db.insert("meteo", null, meteoDuJour);
+        ContentValues CryptomonnaieDuMoment = new ContentValues();
+        CryptomonnaieDuMoment.put("symbol", symbol);
+        CryptomonnaieDuMoment.put("min15", min15);
+        CryptomonnaieDuMoment.put("date", DateFormat.format("yyyy-MM-dd HH:mm:ss", (new Date()).getTime()).toString());
+        CryptomonnaieDuMoment.put("last",last);
+        CryptomonnaieDuMoment.put("buy",buy);
+        CryptomonnaieDuMoment.put("sell",sell);
+        long newRowId = db.insert("cryptomonnaie", null, CryptomonnaieDuMoment);
 
     }
 }

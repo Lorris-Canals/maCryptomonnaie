@@ -94,10 +94,9 @@ public class PageCryptomonnaie extends AppCompatActivity {
             affichageMeteo.append("Sell : " + sell + "\n");
 
 
-            /*
-            CryptomonnaieDAO meteoDAO = new CryptomonnaieDAO(getApplicationContext());
-            meteoDAO.ajouterMeteo(soleilOuNuage, Integer.parseInt(humidite), vent, temperature);
-            */
+            CryptomonnaieDAO cryptomonnaieDAO = new CryptomonnaieDAO(getApplicationContext());
+            cryptomonnaieDAO.ajouterCryptomonnaie(symbol, min15, last, buy, sell);
+
 
         }
          catch (JSONException e) {
